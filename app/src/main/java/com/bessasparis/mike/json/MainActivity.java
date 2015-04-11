@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,17 +20,22 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        updateUI();
+    }
 
+    public void updateUI() {
         String mStr = loadJSONFromAsset();
 
         try {
-            Log.i("mjb", "Q1: "+getQuestionText(mStr, 0));
-        }
-        catch (Exception e) {
+            Log.i("mjb", "Q1: " + getQuestionText(mStr, 0));
+            TextView questionTextView = (TextView) findViewById(R.id.question);
+            questionTextView.setText(getQuestionText(mStr, 0));
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+
 
     public String getQuestionText(String questionJsonStr, int i) throws JSONException {
         String questionText;
