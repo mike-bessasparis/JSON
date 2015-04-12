@@ -1,5 +1,6 @@
 package com.bessasparis.mike.json;
 
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,8 @@ public class MainActivity extends ActionBarActivity {
 
     public String jsonString;
     public JSONObject jsonObj;
+    private int currentQuestion = 0;
+    private int numberOfQuestions = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,20 +31,39 @@ public class MainActivity extends ActionBarActivity {
         try {
             jsonString = loadJSONFromAsset();
             jsonObj = new JSONObject(jsonString);
+            numberOfQuestions = jsonObj.length();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        updateUI(jsonObj);
+
+        findViewById(R.id.next).setOnClickListener(nextButtonHandler);
+
+        displayQuestion(jsonObj, currentQuestion);
+
     }
 
-    public void updateUI(JSONObject mObj) {
+    private View.OnClickListener nextButtonHandler = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (currentQuestion <= numberOfQuestions) {
+                ++currentQuestion;
+            }
+            else {
+                currentQuestion = 0;
+            }
+            displayQuestion(jsonObj, currentQuestion);
+        }
+    };
+
+    public void displayQuestion(JSONObject mObj, int qNumber) {
         TextView questionTextView = (TextView) findViewById(R.id.question);
         Button choice1 = (Button) findViewById(R.id.answerchoice1);
         Button choice2 = (Button) findViewById(R.id.answerchoice2);
         Button choice3 = (Button) findViewById(R.id.answerchoice3);
         Button choice4 = (Button) findViewById(R.id.answerchoice4);
 
-        int qNumber = 0;
+        TextView feedbackText = (TextView) findViewById(R.id.feedback);
+        feedbackText.setText("");
 
         try {
             questionTextView.setText(getQuestionText(mObj, qNumber));
@@ -85,6 +107,7 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View v) {
             TextView feedbackText = (TextView) findViewById(R.id.feedback);
             feedbackText.setText("CORRECT");
+            feedbackText.setTextColor(Color.GREEN);
         }
     };
 
@@ -93,6 +116,7 @@ public class MainActivity extends ActionBarActivity {
         public void onClick(View v) {
             TextView feedbackText = (TextView) findViewById(R.id.feedback);
             feedbackText.setText("WRONG");
+            feedbackText.setTextColor(Color.RED);
         }
     };
 

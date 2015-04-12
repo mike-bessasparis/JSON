@@ -12,6 +12,7 @@
     <TextView
         android:id="@+id/question"
         android:text="question"
+        android:textSize="@dimen/abc_text_size_headline_material"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -37,10 +38,16 @@
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/feedback"
-        android:text="feedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/abc_text_size_display_3_material"/>
+
+    <Button
+        android:id="@+id/next"
+        android:text="Next"
+        android:textSize="@dimen/abc_text_size_headline_material"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
 
 
 </LinearLayout>

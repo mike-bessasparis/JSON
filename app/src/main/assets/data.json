@@ -5,6 +5,16 @@
         "answerchoice3":"AES",
         "answerchoice4":"Encryption",
         "answer":1},
-    {"questiontext":"Smith", "answerchoice1":"one", "answer":1},
-    {"questiontext":"Jones", "answerchoice1":"one", "answer":1}
+    {"questiontext":"If an individual is involved in an ethical dilemma where there is conflict between the (ISC)2 canons, how should the conflict be resolved?",
+        "answerchoice1":"It is not possible to have a conflict between the cannons",
+        "answerchoice2":"The preamble should take precedence",
+        "answerchoice3":"The (ISC)2 peer review panel should queried",
+        "answerchoice4":"Conflicts between the canons should be resolved in the order of the cannons",
+        "answer":4},
+    {"questiontext":"Members who violate any provision of the (ISC)2 Code of Ethics may be subject to revocation of certification. Who makes this determination?",
+        "answerchoice1":"The (ISC)2 board of trustees",
+        "answerchoice2":"The (ISC)2 Code of Ethics review board",
+         "answerchoice3":"A peer review panel",
+         "answerchoice4":"A court of law",
+        "answer":3}
 ]}
