@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,18 +41,60 @@ public class MainActivity extends ActionBarActivity {
         Button choice3 = (Button) findViewById(R.id.answerchoice3);
         Button choice4 = (Button) findViewById(R.id.answerchoice4);
 
+        int qNumber = 0;
+
         try {
-            questionTextView.setText(getQuestionText(mObj, 0));
-            choice1.setText(getChoiceText(mObj, 0, 1));
-            choice2.setText(getChoiceText(mObj, 0, 2));
-            choice3.setText(getChoiceText(mObj, 0, 3));
-            choice4.setText(getChoiceText(mObj, 0, 4));
+            questionTextView.setText(getQuestionText(mObj, qNumber));
+            choice1.setText(getChoiceText(mObj, qNumber, 1));
+            choice2.setText(getChoiceText(mObj, qNumber, 2));
+            choice3.setText(getChoiceText(mObj, qNumber, 3));
+            choice4.setText(getChoiceText(mObj, qNumber, 4));
+            setButtonHandlers(mObj, qNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void setButtonHandlers(JSONObject mObj, int i) throws JSONException {
+        JSONArray questionsArray = mObj.getJSONArray("questions");
+        JSONObject questionObj = questionsArray.getJSONObject(i);
+        int correctButton = questionObj.getInt("answer");
 
+        findViewById(R.id.answerchoice1).setOnClickListener(feedbackWrong);
+        findViewById(R.id.answerchoice2).setOnClickListener(feedbackWrong);
+        findViewById(R.id.answerchoice3).setOnClickListener(feedbackWrong);
+        findViewById(R.id.answerchoice4).setOnClickListener(feedbackWrong);
+
+        if (correctButton == 1) {
+            findViewById(R.id.answerchoice1).setOnClickListener(feedbackCorrect);
+        }
+        else if (correctButton == 2) {
+            findViewById(R.id.answerchoice2).setOnClickListener(feedbackCorrect);
+        }
+        else if (correctButton == 3) {
+            findViewById(R.id.answerchoice3).setOnClickListener(feedbackCorrect);
+        }
+        else if (correctButton == 4) {
+            findViewById(R.id.answerchoice4).setOnClickListener(feedbackCorrect);
+        }
+
+    }
+
+    private View.OnClickListener feedbackCorrect = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            TextView feedbackText = (TextView) findViewById(R.id.feedback);
+            feedbackText.setText("CORRECT");
+        }
+    };
+
+    private View.OnClickListener feedbackWrong = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            TextView feedbackText = (TextView) findViewById(R.id.feedback);
+            feedbackText.setText("WRONG");
+        }
+    };
 
     public String getQuestionText(JSONObject mObj, int i) throws JSONException {
         String questionText;
