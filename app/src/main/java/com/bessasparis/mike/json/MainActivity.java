@@ -21,8 +21,8 @@ public class MainActivity extends ActionBarActivity {
 
     public String jsonString;
     public JSONObject jsonObj;
-    private int currentQuestion = 0;
-    private int numberOfQuestions = 0;
+    public int currentQuestionIndex = 0;
+    public int numberOfQuestions = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,27 +31,30 @@ public class MainActivity extends ActionBarActivity {
         try {
             jsonString = loadJSONFromAsset();
             jsonObj = new JSONObject(jsonString);
-            numberOfQuestions = jsonObj.length();
+            JSONArray mArray = jsonObj.getJSONArray("questions");
+            numberOfQuestions = mArray.length();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         findViewById(R.id.next).setOnClickListener(nextButtonHandler);
 
-        displayQuestion(jsonObj, currentQuestion);
+        displayQuestion(jsonObj, currentQuestionIndex);
 
     }
 
     private View.OnClickListener nextButtonHandler = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (currentQuestion <= numberOfQuestions) {
-                ++currentQuestion;
+            //account for zero-based indexing in array
+            if (currentQuestionIndex+1 < numberOfQuestions) {
+                ++currentQuestionIndex;
             }
             else {
-                currentQuestion = 0;
+                currentQuestionIndex = 0;
             }
-            displayQuestion(jsonObj, currentQuestion);
+            Log.i("mjb", "current q: "+ currentQuestionIndex);
+            displayQuestion(jsonObj, currentQuestionIndex);
         }
     };
 

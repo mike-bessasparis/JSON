@@ -16,11 +16,11 @@
         "answerchoice2":"The (ISC)2 Code of Ethics review board",
          "answerchoice3":"A peer review panel",
          "answerchoice4":"A court of law",
-        "answer":3}
+        "answer":3},
     {"questiontext":"What are the three main goals of any information security program?",
         "answerchoice1":"Preventing losses in accounting, integrity, and confidentiality",
         "answerchoice2":"Preventing losses in availability, identification, and confidentiality",
-         "answerchoice3":"Preventing losses in availabiulity, integrity, and due care",
-         "answerchoice4":"Preventing losses in availbility, integrity, and confidentiality",
+        "answerchoice3":"Preventing losses in availability, integrity, and due care",
+        "answerchoice4":"Preventing losses in availability, integrity, and confidentiality",
         "answer":4}
 ]}
